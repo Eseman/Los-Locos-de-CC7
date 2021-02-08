@@ -630,6 +630,8 @@ sub run_qemu {
   if defined $jitter;
   my (@cmd) = ('qemu-system-i386');
   push (@cmd, '-device', 'isa-debug-exit');
+   # push (@cmd, ‘-no-kqemu’);
+
   push (@cmd, '-drive', 'format=raw,media=disk,index=0,file=' . $disks[0]) if defined $disks[0];
   push (@cmd, '-drive', 'format=raw,media=disk,index=1,file=' . $disks[1]) if defined $disks[1];
   push (@cmd, '-drive', 'format=raw,media=disk,index=2,file=' . $disks[2]) if defined $disks[2];

@@ -93,6 +93,11 @@ struct thread
     /* Shared between thread.c and synch.c. */
     struct list_elem elem;              /* List element. */
 
+    uint64_t TIEMPO_DORMIDO;    /*Sleep time: tiempo que un thread debe permanecer dormido. */
+
+    
+
+
 #ifdef USERPROG
     /* Owned by userprog/process.c. */
     uint32_t *pagedir;                  /* Page directory. */
@@ -119,6 +124,8 @@ tid_t thread_create (const char *name, int priority, thread_func *, void *);
 void thread_block (void);
 void thread_unblock (struct thread *);
 
+
+
 struct thread *thread_current (void);
 tid_t thread_tid (void);
 const char *thread_name (void);
@@ -126,9 +133,18 @@ const char *thread_name (void);
 void thread_exit (void) NO_RETURN;
 void thread_yield (void);
 
+/* toma al thread actual, lo bloquea y lo inserte en la lista de espera*/
+void insertar_en_lista_espera(int64_t ticks);
+
+
+void remover_thread_durmiente(int64_t ticks);
+
+
 /* Performs some operation on thread t, given auxiliary data AUX. */
 typedef void thread_action_func (struct thread *t, void *aux);
 void thread_foreach (thread_action_func *, void *);
+
+
 
 int thread_get_priority (void);
 void thread_set_priority (int);
