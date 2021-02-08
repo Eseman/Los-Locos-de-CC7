@@ -135,7 +135,6 @@ void thread_yield (void);
 
 void insertar_en_lista_espera(int64_t ticks);
 
-
 void remover_thread_durmiente(int64_t ticks);
 
 
