@@ -133,7 +133,6 @@ const char *thread_name (void);
 void thread_exit (void) NO_RETURN;
 void thread_yield (void);
 
-/* toma al thread actual, lo bloquea y lo inserte en la lista de espera*/
 void insertar_en_lista_espera(int64_t ticks);
 
 
