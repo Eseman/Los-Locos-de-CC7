@@ -84,7 +84,7 @@ bool comparar_prioridad(const struct list_elem *primero, const struct list_elem 
 {
   struct thread *first = list_entry(primero,struct thread, elem);
   struct thread *second= list_entry(segundo,struct thread,elem);
-  return first.priority>second.priority;
+  return first->priority > second->priority;
 
 }
 
@@ -346,7 +346,7 @@ insertar_en_lista_espera(int64_t ticks){
 	Cambiar su estatus a THREAD_BLOCKED, y definir su tiempo de expiracion */
 	
 	struct thread *thread_actual = thread_current ();
-  thread_actual->TIEMPO_DORMIDO = timer_ticks() + ticks;
+  thread_actual->TIEMPO_DORMIDO = timer_ticks () + ticks;
   
 
 	
@@ -354,7 +354,7 @@ insertar_en_lista_espera(int64_t ticks){
 
   //list_insert_ordered (struct list *list, struct list_elem *elem,list_less_func *less, void *aux)
   //Basado en la sugerencia de la guia se insertara en esta lista en base a la prioridad
-  list_insert_ordered(&lista_espera, %thread_actual->elem,(list_less_func *)comparar_prioridad,NULL);  
+  list_insert_ordered(&lista_espera, &thread_actual->elem,(list_less_func *)comparar_prioridad,NULL);  
 
   thread_block();
 
