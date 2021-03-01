@@ -78,6 +78,16 @@ static void schedule (void);
 void thread_schedule_tail (struct thread *prev);
 static tid_t allocate_tid (void);
 
+
+//Funcion para insert_ordered, descendente en base a prioridad.
+bool comparar_prioridad(const struct list_elem *primero, const struct list_elem *segundo, void *aux)
+{
+  struct thread *first = list_entry(primero,struct thread, elem);
+  struct thread *second= list_entry(segundo,struct thread,elem);
+  return first.priority>second.priority;
+
+}
+
 /* Initializes the threading system by transforming the code
    that's currently running into a thread.  This can't work in
    general and it is possible in this case only because loader.S
@@ -340,7 +350,12 @@ insertar_en_lista_espera(int64_t ticks){
   
 
 	
-  list_push_back(&lista_espera, &thread_actual->elem);
+  //list_push_back(&lista_espera, &thread_actual->elem); Anteriormente se insertaba al final
+
+  //list_insert_ordered (struct list *list, struct list_elem *elem,list_less_func *less, void *aux)
+  //Basado en la sugerencia de la guia se insertara en esta lista en base a la prioridad
+  list_insert_ordered(&lista_espera, %thread_actual->elem,(list_less_func *)comparar_prioridad,NULL);  
+
   thread_block();
 
   //Habilitar interrupciones,
@@ -419,7 +434,7 @@ thread_set_priority (int new_priority)
 
    
     thread_current ()->priority = new_priority;  //esta original
-  struct thread *cur = thread_current();
+ /* struct thread *cur = thread_current();
 
 
 
@@ -430,7 +445,7 @@ thread_set_priority (int new_priority)
 	while(iter != list_end(&ready_list) ){
        struct thread *thread_ready_list= list_entry(iter, struct thread, elem);
 
-      }  
+      }  */
 
 // thread_yield();
 
