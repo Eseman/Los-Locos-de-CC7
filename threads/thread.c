@@ -396,29 +396,45 @@ thread_foreach (thread_action_func *func, void *aux)
 void
 thread_set_priority (int new_priority) 
 {
-  thread_current ()->priority = new_priority; 
+ /* thread_current ()->priority = new_priority; 
 
- /*Comprobando que la nueva prioridad
-  se encuentre entre los limites dados*/
+ Comprobando que la nueva prioridad
+  se encuentre entre los limites dados
   if(new_priority < PRI_MIN || new_priority > PRI_MAX)
     return;
    
-
-
-  /*Comprobando que no sea la misma prioridad que ya posee*/
+  Comprobando que no sea la misma prioridad que ya posee
 
   if (thread_current ()->priority= new_priority){
    return;
 
   } 
 
-    thread_current ()->priority = new_priority; 
-
-
- /* Bajo cierta condicion llamar a thread_yield()
+  Bajo cierta condicion llamar a thread_yield()
     thread_yield();
-  */
-  
+
+
+*/
+
+
+   
+    thread_current ()->priority = new_priority;  //esta original
+  struct thread *cur = thread_current();
+
+
+
+
+
+     
+	struct list_elem *iter = list_begin(&ready_list);
+	while(iter != list_end(&ready_list) ){
+       struct thread *thread_ready_list= list_entry(iter, struct thread, elem);
+
+      }  
+
+// thread_yield();
+
+
 
 
 }
