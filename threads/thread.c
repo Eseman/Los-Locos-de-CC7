@@ -77,10 +77,10 @@ static void *alloc_frame (struct thread *, size_t size);
 static void schedule (void);
 void thread_schedule_tail (struct thread *prev);
 static tid_t allocate_tid (void);
-
+static ordenar_prioridad(const struct list_elem *primero, const struct list_elem *segundo, void *aux)
 
 //Funcion para insert_ordered, descendente en base a prioridad.
-bool comparar_prioridad(const struct list_elem *primero, const struct list_elem *segundo, void *aux)
+bool ordenar_prioridad(const struct list_elem *primero, const struct list_elem *segundo, void *aux)
 {
   struct thread *first = list_entry(primero,struct thread, elem);
   struct thread *second= list_entry(segundo,struct thread,elem);
