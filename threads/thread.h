@@ -89,7 +89,7 @@ struct thread
     uint8_t *stack;                     /* Saved stack pointer. */
     int priority;                       /* Priority. */
     struct list_elem allelem;           /* List element for all threads list. */.
-    int first_priority;                  /*Primera prioridad es decir la original */
+    int first_priority   ;                  /*Primera prioridad es decir la original */
     bool thread_dono;                    /*Si el thread dono a otro*/
     bool thread_recibio;                 /*Si el thread recibio donacion de otro */
 
