@@ -32,6 +32,19 @@
 #include "threads/interrupt.h"
 #include "threads/thread.h"
 
+static ordenar_prioridad(const struct list_elem *primero, const struct list_elem *segundo, void *aux);
+
+
+void *aux;
+//Funcion para insert_ordered, descendente en base a prioridad.
+bool ordenar_prioridad(const struct list_elem *primero, const struct list_elem *segundo, void *aux)
+{
+  struct thread *first = list_entry(primero,struct thread, elem);
+  struct thread *second= list_entry(segundo,struct thread,elem);
+  return first->priority > second->priority;
+
+}
+
 /* Initializes semaphore SEMA to VALUE.  A semaphore is a
    nonnegative integer along with two atomic operators for
    manipulating it:
