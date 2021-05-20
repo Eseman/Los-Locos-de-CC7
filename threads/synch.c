@@ -32,7 +32,7 @@
 #include "threads/interrupt.h"
 #include "threads/thread.h"
 
-static ordenar_prioridad(const struct list_elem *primero, const struct list_elem *segundo, void *aux);
+static bool ordenar_prioridad(const struct list_elem *primero, const struct list_elem *segundo, void *aux);
 
 
 void *aux;
