@@ -349,12 +349,11 @@ insertar_en_lista_espera(int64_t ticks){
   thread_actual->TIEMPO_DORMIDO = timer_ticks () + ticks;
   
 
-	
-  //list_push_back(&lista_espera, &thread_actual->elem); Anteriormente se insertaba al final
+	/*Donde TIEMPO_DORMIDO es el atributo de la estructura thread que usted
+	  definió como paso inicial*/
+  list_push_back(&lista_espera, &thread_actual->elem);
 
-  //list_insert_ordered (struct list *list, struct list_elem *elem,list_less_func *less, void *aux)
-  //Basado en la sugerencia de la guia se insertara en esta lista en base a la prioridad
-  list_insert_ordered(&lista_espera, &thread_actual->elem,(list_less_func *)comparar_prioridad,NULL);  
+
 
   thread_block();
 
