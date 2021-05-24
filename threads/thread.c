@@ -434,21 +434,19 @@ thread_set_priority (int new_priority)
 
   } 
 
+if (thread_actual->thread_dono_recibio){
+
+	if(new_priority >thread_actual->priority ){
+           thread_current ()->priority = new_priority;
+	
+
+		
+} 
+		
 
 
 
-   
-    thread_current ()->priority = new_priority;  //esta original
- /* struct thread *cur = thread_current();
-
-
-
-
-
-       */
-
-// thread_yield();
-
+  } 
 
 
 
