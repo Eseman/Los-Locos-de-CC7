@@ -90,8 +90,7 @@ struct thread
     int priority;                       /* Priority. */
     struct list_elem allelem;           /* List element for all threads list. */
     int first_priority   ;                  /*Primera prioridad es decir la original */
-    bool thread_dono;                    /*Si el thread dono a otro*/
-    bool thread_recibio;                 /*Si el thread recibio donacion de otro */
+    bool thread_dono_recibio;                    /*Si el thread dono o recibio donacion*/
     struct list holdingLocks ;            /*Locks que posee el thread*/  
     struct list locksTryAcquire   ;        /*Locks que intentan hacer acquire */
 
