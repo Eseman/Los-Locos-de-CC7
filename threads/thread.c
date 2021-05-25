@@ -452,6 +452,11 @@ else {
 
      thread_actual-> priority = new_priority;
 
+  if(new_priority< list_entry(list_max(&ready_list,&ordenar_prioridad , aux) , struct thread, elem)->priority) {
+
+         thread_yield() ;
+		} 
+
  }
 
 
