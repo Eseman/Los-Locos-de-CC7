@@ -214,9 +214,23 @@ timer_interrupt (struct intr_frame *args UNUSED)
   ticks++;
   thread_tick ();
 
- //------------------------------
-  remover_thread_durmiente(ticks);
-  //------------------------------
+   struct thread *thread_obtenido;
+  while(true){
+
+    if(list_empty(&list_blocked))
+      break;
+
+    thread_obtenido = list_entry(list_front(&list_blocked), struct thread, elem);
+
+    if(thread_obtenido->ticks_sleep_end <= ticks)
+    { 
+      list_remove(&thread_obtenido->elem);
+      thread_unblock(thread_obtenido);
+    }
+    else
+      break;
+  }
+
 
 
 }
