@@ -34,6 +34,8 @@
 
 static bool ordenar_prioridad(const struct list_elem *primero, const struct list_elem *segundo, void *aux);
 
+static bool ordenar_lock(const struct list_elem *primero, const struct list_elem *segundo, void *aux);
+
 
 void *aux;
 //Funcion para insert_ordered, descendente en base a prioridad.
@@ -44,6 +46,15 @@ bool ordenar_prioridad(const struct list_elem *primero, const struct list_elem *
   return first->priority > second->priority;
 
 }
+
+bool ordenar_lock(const struct list_elem *primero, const struct list_elem *segundo, void *aux)
+{
+  struct lock *first_lock = list_entry(primero,struct lock,lock_holding_elem);
+  struct lock *second_lock= list_entry(segundo,struct lock,lock_holding_elem);
+  return first_lock->priority > second_lock->priority;
+
+}
+
 
 /* Initializes semaphore SEMA to VALUE.  A semaphore is a
    nonnegative integer along with two atomic operators for
