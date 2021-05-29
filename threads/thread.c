@@ -588,14 +588,16 @@ init_thread (struct thread *t, const char *name, int priority)
   t->stack = (uint8_t *) t + PGSIZE;
   t->priority = priority;
   t->first_priority = priority;
-  t->thread_dono= false;
-  t->thread_recibio = false;   
-  
-  t->magic = THREAD_MAGIC;
+  t->thread_dono_recibio= false;
 
   list_init(&t->holdingLocks);
   list_init(&t->locksTryAcquire); 
-   
+  t->lockTryAcquire = NULL ;
+
+  
+  t->magic = THREAD_MAGIC;
+
+
 
 
   old_level = intr_disable ();

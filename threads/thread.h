@@ -93,6 +93,7 @@ struct thread
     bool thread_dono_recibio;                    /*Si el thread dono o recibio donacion*/
     struct list holdingLocks ;            /*Locks que posee el thread*/  
     struct list locksTryAcquire   ;        /*Locks que intentan hacer acquire */
+    struct lock *lockTryAcquire  ;  /*Lock TryAcquire*/
 
     /* Shared between thread.c and synch.c. */
     struct list_elem elem;              /* List element. */
