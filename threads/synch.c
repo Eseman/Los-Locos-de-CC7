@@ -250,9 +250,22 @@ lock_acquire (struct lock *lock)
 
   actual->lockTryAcquire = lock;
 
+  while(lock->holder !=NULL)  { 
+   
+   struct lock *aux_lock = lock;
+   struct list_elem *aux_elem;
+
+   if(aux_lock->priority < actual->priority)
+        {
+          aux_lock->priority = actual->priority;
+          aux_lock->holder->priority = aux_lock->priority;
+          aux_lock->holder->thread_dono_recibio = true;
 
 
 
+         }
+
+   }
 
 
   sema_down (&lock->semaphore);
