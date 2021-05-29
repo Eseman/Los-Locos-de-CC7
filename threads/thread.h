@@ -94,6 +94,9 @@ struct thread
     struct list holdingLocks ;            /*Locks que posee el thread*/  
     struct list locksTryAcquire   ;        /*Locks que intentan hacer acquire */
     struct lock *lockTryAcquire  ;  /*Lock TryAcquire*/
+    /*Ticks timer sleep*/
+    int64_t ticks_sleep_end;
+    int64_t ticks_sleep_start;
 
     /* Shared between thread.c and synch.c. */
     struct list_elem elem;              /* List element. */
