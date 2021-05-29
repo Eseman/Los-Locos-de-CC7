@@ -36,6 +36,8 @@ static bool ordenar_prioridad(const struct list_elem *primero, const struct list
 
 static bool ordenar_lock(const struct list_elem *primero, const struct list_elem *segundo, void *aux);
 
+static bool ordenar_cond(const struct list_elem *primero, const struct list_elem *segundo, void *aux );
+
 
 void *aux;
 //Funcion para insert_ordered, descendente en base a prioridad.
@@ -367,6 +369,15 @@ cond_signal (struct condition *cond, struct lock *lock UNUSED)
   if (!list_empty (&cond->waiters)) 
     sema_up (&list_entry (list_pop_front (&cond->waiters),
                           struct semaphore_elem, elem)->semaphore);
+}
+
+static bool ordenar_cond(const struct list_elem *primero, const struct list_elem *segundo, void *aux )
+{
+  struct semaphore first_semaphore = list_entry (primero, struct semaphore_elem, elem)->semaphore;
+  struct semaphore second_semaphore = list_entry (segundo, struct semaphore_elem, elem)->semaphore;
+  struct thread *thread_first = list_entry(list_front(&(first_semaphore.waiters)), struct thread, elem);
+  struct thread *thread_second = list_entry(list_front(&(second_semaphore.waiters)), struct thread, elem);
+  return thread_first->priority > thread_second->priority;
 }
 
 /* Wakes up all threads, if any, waiting on COND (protected by
