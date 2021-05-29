@@ -57,6 +57,8 @@ timer_init (void)
 {
   pit_configure_channel (0, 2, TIMER_FREQ);
   intr_register_ext (0x20, timer_interrupt, "8254 Timer");
+    list_init(&list_blocked);
+
 }
 
 /* Calibrates loops_per_tick, used to implement brief delays. */
@@ -109,15 +111,29 @@ timer_elapsed (int64_t then)
 void
 timer_sleep (int64_t ticks) 
 {
-  //int64_t start = timer_ticks ();
+
+   if(ticks > 0){
+    enum intr_level old_level;
+    int64_t start = timer_ticks ();
+    int64_t end = start + ticks;
+    struct thread *actual_thread = thread_current();
+
 
   ASSERT (intr_get_level () == INTR_ON);
-  /*while (timer_elapsed (start) < ticks) 
-    thread_yield ();*/
+
+
+        actual_thread->ticks_sleep_end = end;
+    actual_thread->ticks_sleep_start = start;
+
+    list_insert_ordered(&list_blocked, &actual_thread->elem, &compareticks, aux);
+    
+    old_level = intr_disable();
+    thread_block();
+    intr_set_level(old_level);
 
       
   //-----------------------------
-  insertar_en_lista_espera(ticks);
+//  insertar_en_lista_espera(ticks);
   //-----------------------------
 }
 
