@@ -49,8 +49,8 @@ bool ordenar_prioridad(const struct list_elem *primero, const struct list_elem *
 
 bool ordenar_lock(const struct list_elem *primero, const struct list_elem *segundo, void *aux)
 {
-  struct lock *first_lock = list_entry(primero,struct lock,lock_holding_elem);
-  struct lock *second_lock= list_entry(segundo,struct lock,lock_holding_elem);
+  struct lock *first_lock = list_entry(primero,struct lock,elemLockHolding);
+  struct lock *second_lock= list_entry(segundo,struct lock,elemLockHolding);
   return first_lock->priority > second_lock->priority;
 
 }
