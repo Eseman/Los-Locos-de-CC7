@@ -20,6 +20,10 @@
 /* Number of timer ticks since OS booted. */
 static int64_t ticks;
 
+/*Procesos en estado Blocked*/
+static struct list list_blocked;
+
+
 /* Number of loops per timer tick.
    Initialized by timer_calibrate(). */
 static unsigned loops_per_tick;
@@ -29,6 +33,22 @@ static bool too_many_loops (unsigned loops);
 static void busy_wait (int64_t loops);
 static void real_time_sleep (int64_t num, int32_t denom);
 static void real_time_delay (int64_t num, int32_t denom);
+
+bool compareticks(struct list_elem *a, struct list_elem *b, void *aux);
+void *aux;
+
+bool 
+compareticks(const struct list_elem *primero,const struct list_elem *segundo, void *aux )
+{
+  struct thread *primer_thread = list_entry(primero, struct thread, elem);
+  struct thread *segundo_thread = list_entry(segundo, struct thread, elem);
+  if(primer_thread->ticks_sleep_end== segundo_thread->ticks_sleep_end)
+  {
+    return primer_thread->priority > segundo_thread->priority;
+  }else{
+       return primer_thread->ticks_sleep_end < segundo_thread->ticks_sleep_end;
+  }
+}
 
 /* Sets up the timer to interrupt TIMER_FREQ times per second,
    and registers the corresponding interrupt. */
