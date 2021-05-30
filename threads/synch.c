@@ -323,9 +323,13 @@ lock_release (struct lock *lock)
      actual->thread_dono_recibio = false;
      actual->priority = actual->first_priority;
 
-
-
      }
+
+
+  else{
+      struct lock *aux_lock = list_entry(list_front(&actual->holdingLocks), struct lock, elemLockHolding);
+      actual->priority = aux_lock->priority;
+    }  
 
 
 
