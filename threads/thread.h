@@ -128,12 +128,7 @@ struct thread
 extern bool thread_mlfqs;
 
 
-/*Prototipo de Funciones para MLFQS*/
 
-void actualizar_recent_cpu(void);
-void actualizar_prioridad_threads(void);
-void actualizar_prioridad(struct thread *t);
-void set_load_avg(void);
 
 
 void thread_init (void);
@@ -162,7 +157,12 @@ void thread_yield (void);
 typedef void thread_action_func (struct thread *t, void *aux);
 void thread_foreach (thread_action_func *, void *);
 
+/*Prototipo de Funciones para MLFQS*/
 
+void update_priority(void);
+void thread_update_recent_cpu(void);
+void thread_update_priority(struct thread *t);
+void set_load_avg(void);
 
 int thread_get_priority (void);
 void thread_set_priority (int);
