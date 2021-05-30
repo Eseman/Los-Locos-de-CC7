@@ -64,6 +64,7 @@ static unsigned thread_ticks;   /* # of timer ticks since last yield. */
    If true, use multi-level feedback queue scheduler.
    Controlled by kernel command-line option "-o mlfqs". */
 bool thread_mlfqs;
+int load_avg = 0;
 
 static void kernel_thread (thread_func *, void *aux);
 
@@ -205,6 +206,8 @@ thread_create (const char *name, int priority,
     return TID_ERROR;
 
   /* Initialize thread. */
+  t->nice = running_thread()->nice;
+  t->recent_cpu = running_thread()->recent_cpu;
   init_thread (t, name, priority);
   tid = t->tid = allocate_tid ();
 
