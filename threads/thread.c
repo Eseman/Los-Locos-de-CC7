@@ -452,6 +452,21 @@ thread_get_recent_cpu(void)
 
 
 void set_load_avg(void){
+    int threadsReady = list_size(&ready_list);
+  if(running_thread() != idle_thread)
+             {
+              threadsReady++;
+              }
+ load_avg = sumaFP(
+                   multFP(
+                          divFP(
+                                converToFP(59) , converToFP(60))
+                                , load_avg),
+                                            multintFP(
+                                                      divFP(
+                                                            converToFP(1) , converToFP(60))
+                                                            , threads_ready));
+          
 
 
 }
