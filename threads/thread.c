@@ -118,8 +118,8 @@ thread_init (void)
   /* Set up a thread structure for the running thread. */
   initial_thread = running_thread ();
   /*Iniciando valores de nice y recent_cpu*/
-  init_thread->nice = 0;
-  init_thread->recent_cpu = 0;
+  initial_thread->nice = 0;
+  initial_thread->recent_cpu = 0;
   init_thread (initial_thread, "main", PRI_DEFAULT);
   initial_thread->status = THREAD_RUNNING;
   initial_thread->tid = allocate_tid ();
@@ -404,7 +404,7 @@ thread_get_priority (void)
 void
 thread_set_nice (int nice UNUSED) 
 {
-   thread_current->nice = nice;
+   thread_current()->nice = nice;
 
 }
 
