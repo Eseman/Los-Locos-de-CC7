@@ -132,9 +132,7 @@ timer_sleep (int64_t ticks)
     intr_set_level(old_level);
       }
       
-  //-----------------------------
-//  insertar_en_lista_espera(ticks);
-  //-----------------------------
+
 }
 
 /* Sleeps for approximately MS milliseconds.  Interrupts must be

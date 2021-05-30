@@ -103,7 +103,7 @@ struct thread
     /* Shared between thread.c and synch.c. */
     struct list_elem elem;              /* List element. */
 
-    uint64_t TIEMPO_DORMIDO;    /*Sleep time: tiempo que un thread debe permanecer dormido. */
+
 
     
 
@@ -146,10 +146,6 @@ const char *thread_name (void);
 
 void thread_exit (void) NO_RETURN;
 void thread_yield (void);
-
-void insertar_en_lista_espera(int64_t ticks);
-
-void remover_thread_durmiente(int64_t ticks);
 
 
 /* Performs some operation on thread t, given auxiliary data AUX. */
