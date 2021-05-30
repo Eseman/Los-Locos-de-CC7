@@ -423,21 +423,13 @@ thread_set_priority (int new_priority)
 {
   
     struct thread *thread_actual = thread_current ();
-  /* Comprobando que la nueva prioridad
-  se encuentre entre los limites dados*/
-  if(new_priority < PRI_MIN || new_priority > PRI_MAX)
-    return;
+      thread_actual->first_priority = new_priority;
 
-   /* C*/
-  if (thread_current ()->priority==new_priority){
-   return;
-
-  } 
 
 if (thread_actual->thread_dono_recibio){
 
 	if(new_priority >thread_actual->priority ){
-           thread_current ()->priority = new_priority;
+            thread_actual->priority = new_priority;
 
            if(new_priority< list_entry(list_max(&ready_list,&ordenar_prioridad , aux) , struct thread, elem)->priority) {
 
