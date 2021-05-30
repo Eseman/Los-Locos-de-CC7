@@ -518,6 +518,12 @@ if(!list_empty(&all_list))
 
 void update_priority(struct thread *t)
 {
+  t->priority = restaIntFromFP(
+                             restaFP(
+                                    converToFP(PRI_MAX) ,
+                                                         divintFP(
+                                                                  t->recent_cpu,4)) ,
+                                                                                   (t->nice * 2));
 
 }
 
