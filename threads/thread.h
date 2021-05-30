@@ -100,6 +100,11 @@ struct thread
     int64_t ticks_sleep_end;
     int64_t ticks_sleep_start;
 
+
+    /*variables para MLFQS*/
+     int nice;
+     int recent_cpu;
+
     /* Shared between thread.c and synch.c. */
     struct list_elem elem;              /* List element. */
 
