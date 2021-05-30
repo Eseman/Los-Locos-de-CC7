@@ -313,8 +313,9 @@ lock_release (struct lock *lock)
   ASSERT (lock_held_by_current_thread (lock));
 
 
-  list_remove(&lock->elemLockHolding); 
+
   lock->holder = NULL;
+  list_remove(&lock->elemLockHolding); 
   struct thread *actual = thread_current();
 
   if(list_empty(&actual->holdingLocks))  {
@@ -418,10 +419,11 @@ cond_signal (struct condition *cond, struct lock *lock UNUSED)
   ASSERT (!intr_context ());
   ASSERT (lock_held_by_current_thread (lock));
 
-  if (!list_empty (&cond->waiters)) 
+  if (!list_empty (&cond->waiters)) {
+      list_sort(&cond->waiters, &ordenar_cond, aux);
     sema_up (&list_entry (list_pop_front (&cond->waiters),
                           struct semaphore_elem, elem)->semaphore);
-}
+}}
 
 static bool ordenar_cond(const struct list_elem *primero, const struct list_elem *segundo, void *aux )
 {
