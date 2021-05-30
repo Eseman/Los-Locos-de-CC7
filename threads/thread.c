@@ -446,18 +446,7 @@ if (thread_actual->thread_dono_recibio){
 	} 
 	
   } 
-else {
 
-   thread_actual -> first_priority = new_priority;
-
-     thread_actual-> priority = new_priority;
-
-  if(new_priority< list_entry(list_max(&ready_list,&ordenar_prioridad , aux) , struct thread, elem)->priority) {
-
-         thread_yield() ;
-		} 
-
- }
 
 
 
