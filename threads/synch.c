@@ -248,6 +248,9 @@ lock_acquire (struct lock *lock)
 
   struct thread *actual = thread_current();
 
+    if(thread_mlfqs == false)
+  {
+
   actual->lockTryAcquire = lock;
 
   if(lock->holder !=NULL)  { 
@@ -271,13 +274,17 @@ lock_acquire (struct lock *lock)
    }
 
     }
+    }
 
 
   sema_down (&lock->semaphore);
   lock->priority = actual->priority;
   lock->holder = actual;
+    if(thread_mlfqs == false)
+  {
   actual->lockTryAcquire = NULL;
   list_insert_ordered(&actual->holdingLocks, &lock->elemLockHolding, &ordenar_lock, aux);
+}
 
 }
 
@@ -315,6 +322,8 @@ lock_release (struct lock *lock)
 
 
   lock->holder = NULL;
+   if(thread_mlfqs == false)
+  {
   list_remove(&lock->elemLockHolding); 
   struct thread *actual = thread_current();
 
@@ -331,9 +340,7 @@ lock_release (struct lock *lock)
       struct lock *aux_lock = list_entry(list_front(&actual->holdingLocks), struct lock, elemLockHolding);
       actual->priority = aux_lock->priority;
     }  
-
-
-
+  }
 
   sema_up (&lock->semaphore);
 }
