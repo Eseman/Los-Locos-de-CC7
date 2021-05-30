@@ -255,7 +255,7 @@ lock_acquire (struct lock *lock)
    struct lock *aux_lock = lock;
   // struct list_elem *aux_elem;
    
-   while(lock != NULL)
+   while(aux_lock != NULL)
       {
 
    if(aux_lock->priority < actual->priority)
