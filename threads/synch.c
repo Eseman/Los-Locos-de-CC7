@@ -253,7 +253,7 @@ lock_acquire (struct lock *lock)
   if(lock->holder !=NULL)  { 
    
    struct lock *aux_lock = lock;
-   struct list_elem *aux_elem;
+  // struct list_elem *aux_elem;
    
    while(lock != NULL)
       {
@@ -313,6 +313,19 @@ lock_release (struct lock *lock)
   ASSERT (lock_held_by_current_thread (lock));
 
   lock->holder = NULL;
+  struct thread *actual = thread_current();
+
+  if(list_empty(&actual->holdingLocks))  {
+    
+     actual->priority = actual->first_priority;
+
+
+
+     }
+
+
+
+
   sema_up (&lock->semaphore);
 }
 
@@ -410,6 +423,7 @@ static bool ordenar_cond(const struct list_elem *primero, const struct list_elem
   struct thread *thread_second = list_entry(list_front(&(second_semaphore.waiters)), struct thread, elem);
   return thread_first->priority > thread_second->priority;
 }
+
 
 /* Wakes up all threads, if any, waiting on COND (protected by
    LOCK).  LOCK must be held before calling this function.
