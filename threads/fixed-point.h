@@ -1,4 +1,3 @@
-
 #define F (1 << 14)
 
 
@@ -45,7 +44,7 @@ int divintFP(int a, int b)
 	return a / b;
 }
 
-//Conversiones
+
 
 int converToFP(int n)
 {
