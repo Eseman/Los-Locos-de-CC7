@@ -419,6 +419,7 @@ void
 thread_set_nice (int nice UNUSED) 
 {
    thread_current()->nice = nice;
+  update_priority(thread_current());
 
 }
 
@@ -433,13 +434,14 @@ thread_get_nice (void)
 int
 thread_get_load_avg (void) 
 {
-  /* Not yet implemented. */
-  return 0;
+    return converToInt(load_avg*100);
+
 }
 
 int
 thread_get_recent_cpu(void)
 {
+  return converToInt(thread_current()->recent_cpu * 100);
 
 }
 
