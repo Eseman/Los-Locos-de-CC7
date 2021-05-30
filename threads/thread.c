@@ -227,9 +227,12 @@ thread_create (const char *name, int priority,
   thread_unblock (t);
 
   /*Condicion Yield */
+    if(thread_mlfqs == false)
+  {
   if(priority > thread_current()->priority)  { 
    thread_yield() ;   
   }  
+   } 
    
 
   return tid;
@@ -370,6 +373,9 @@ thread_foreach (thread_action_func *func, void *aux)
 void
 thread_set_priority (int new_priority) 
 {
+
+  if(thread_mlfqs == false)
+  {
   
     struct thread *thread_actual = thread_current ();
       thread_actual->first_priority = new_priority;
@@ -386,8 +392,16 @@ if (thread_actual->thread_dono_recibio){
 		} 
 	} 
 	
-  } 
+  }
+   else
+    {
+      thread_actual->first_priority = new_priority;
+      thread_actual->priority = new_priority;
+      if(new_priority < list_entry(list_max(&ready_list, &ordenar_prioridad, aux), struct thread, elem)->priority)
+        thread_yield();
+    } 
 
+ } 
 
 
 
