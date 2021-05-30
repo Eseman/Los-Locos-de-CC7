@@ -482,7 +482,13 @@ void thread_update_recent_cpu(void){
     {
 
         struct thread *thread_temporal = list_entry(actual_member, struct thread, allelem);
-        //TO implement
+        thread_temporal->recent_cpu = sumaIntToFP(
+                                  multFP(
+                                          divFP(
+                                                 multintFP(load_avg, 2)
+                                                            ,sumaIntToFP(
+                                                                        multintFP(load_avg, 2) , 1)) ,
+                                                                                  thread_temporal->recent_cpu) , thread_temporal->nice);
         actual_member = list_next(actual_member);
         
 
