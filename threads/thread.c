@@ -480,7 +480,11 @@ void thread_update_recent_cpu(void){
     struct list_elem *actual_member = list_begin(&all_list);
     while(actual_member != list_end(&all_list))
     {
+
+        struct thread *thread_temporal = list_entry(actual_member, struct thread, allelem);
+        //TO implement
         actual_member = list_next(actual_member);
+        
 
 
 }
@@ -491,8 +495,23 @@ void thread_update_recent_cpu(void){
 
 
 
-void thread_update_priority(void)
-{
+void thread_update_priority(void){
+
+
+if(!list_empty(&all_list))
+  {
+    struct list_elem *actual_member = list_begin(&all_list);
+    while(actual_member != list_end(&all_list))
+    {
+
+        struct thread *thread_temporal = list_entry(actual_member, struct thread, allelem);
+        //TO implement
+        actual_member = list_next(actual_member);
+        
+
+
+}
+}
 
 }
 
