@@ -122,9 +122,6 @@ struct thread
    Controlled by kernel command-line option "-o mlfqs". */
 extern bool thread_mlfqs;
 
-//Funcion para insert ordered
-bool comparar_prioridad (const struct list_elem *primero, const struct list_elem *segundo, void *aux);
-
 
 void thread_init (void);
 void thread_start (void);

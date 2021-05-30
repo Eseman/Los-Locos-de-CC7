@@ -24,7 +24,6 @@
 
  /*lista de  threads que están en espera de que 
 se cumpla su tiempo de estar durmiendo.*/
-static struct list lista_espera; 
 
 
 /* List of processes in THREAD_READY state, that is, processes
@@ -112,7 +111,6 @@ thread_init (void)
   list_init (&ready_list);
   list_init (&all_list);
 
-  list_init (&lista_espera);
 
 
    
