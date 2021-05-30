@@ -312,11 +312,15 @@ lock_release (struct lock *lock)
   ASSERT (lock != NULL);
   ASSERT (lock_held_by_current_thread (lock));
 
+
+  list_remove(&lock->elemLockHolding); 
   lock->holder = NULL;
   struct thread *actual = thread_current();
 
   if(list_empty(&actual->holdingLocks))  {
-    
+
+
+     actual->thread_dono_recibio = false;
      actual->priority = actual->first_priority;
 
 
