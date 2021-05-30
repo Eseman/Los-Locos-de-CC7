@@ -465,7 +465,7 @@ void set_load_avg(void){
                                             multintFP(
                                                       divFP(
                                                             converToFP(1) , converToFP(60))
-                                                            , threads_ready));
+                                                            , threadsReady));
           
 
 
@@ -473,7 +473,18 @@ void set_load_avg(void){
 
 
 void thread_update_recent_cpu(void){
+ 
+ 
+ if(!list_empty(&all_list))
+  {
+    struct list_elem *actual_member = list_begin(&all_list);
+    while(actual_member != list_end(&all_list))
+    {
+        actual_member = list_next(actual_member);
 
+
+}
+}
 }
 
 
