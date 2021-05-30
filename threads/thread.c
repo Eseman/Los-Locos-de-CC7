@@ -423,14 +423,41 @@ thread_get_load_avg (void)
   return 0;
 }
 
-/* Returns 100 times the current thread's recent_cpu value. */
 int
-thread_get_recent_cpu (void) 
+thread_get_recent_cpu(void)
 {
-  /* Not yet implemented. */
-  return 0;
+
 }
-
+
+
+
+void set_load_avg(void){
+
+
+}
+
+
+void thread_update_recent_cpu(void){
+
+}
+
+
+
+
+
+void thread_update_priority(void)
+{
+
+}
+
+
+void update_priority(struct thread *t)
+{
+
+}
+
+
+
 /* Idle thread.  Executes when no other thread is ready to run.
 
    The idle thread is initially put on the ready list by

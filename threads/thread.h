@@ -159,9 +159,9 @@ void thread_foreach (thread_action_func *, void *);
 
 /*Prototipo de Funciones para MLFQS*/
 
-void update_priority(void);
+void update_priority(struct thread *t);
 void thread_update_recent_cpu(void);
-void thread_update_priority(struct thread *t);
+void thread_update_priority(void);
 void set_load_avg(void);
 
 int thread_get_priority (void);
