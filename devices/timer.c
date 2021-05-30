@@ -38,7 +38,7 @@ bool compareticks(const struct list_elem *primero, const struct list_elem *segun
 void *aux;
 
 bool 
-compareticks(const struct list_elem *primero,const struct list_elem *segundo, void *aux )
+compareticks(const struct list_elem *primero,const struct list_elem *segundo, void *aux UNUSED )
 {
   struct thread *primer_thread = list_entry(primero, struct thread, elem);
   struct thread *segundo_thread = list_entry(segundo, struct thread, elem);
@@ -82,7 +82,7 @@ timer_calibrate (void)
   /* Refine the next 8 bits of loops_per_tick. */
   high_bit = loops_per_tick;
   for (test_bit = high_bit >> 1; test_bit != high_bit >> 10; test_bit >>= 1)
-    if (!too_many_loops (high_bit | test_bit))
+    if (!too_many_loops (loops_per_tick | test_bit))
       loops_per_tick |= test_bit;
 
   printf ("%'"PRIu64" loops/s.\n", (uint64_t) loops_per_tick * TIMER_FREQ);
