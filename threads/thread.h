@@ -128,6 +128,14 @@ struct thread
 extern bool thread_mlfqs;
 
 
+/*Prototipo de Funciones para MLFQS*/
+
+void actualizar_recent_cpu(void);
+void actualizar_prioridad_threads(void);
+void actualizar_prioridad(struct thread *t);
+void set_load_avg(void);
+
+
 void thread_init (void);
 void thread_start (void);
 
