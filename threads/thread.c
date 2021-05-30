@@ -505,7 +505,7 @@ if(!list_empty(&all_list))
     {
 
         struct thread *thread_temporal = list_entry(actual_member, struct thread, allelem);
-        //TO implement
+        update_priority(thread_temporal);
         actual_member = list_next(actual_member);
         
 
@@ -614,8 +614,15 @@ init_thread (struct thread *t, const char *name, int priority)
   t->status = THREAD_BLOCKED;
   strlcpy (t->name, name, sizeof t->name);
   t->stack = (uint8_t *) t + PGSIZE;
+  if(thread_mlfqs == true)
+  {
+    update_priority(t);
+  }
+  else
+  {
   t->priority = priority;
   t->first_priority = priority;
+  }
   t->thread_dono_recibio= false;
 
   list_init(&t->holdingLocks);
