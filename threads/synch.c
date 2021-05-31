@@ -41,7 +41,7 @@ static bool ordenar_cond(const struct list_elem *primero, const struct list_elem
 
 void *aux;
 //Funcion para insert_ordered, descendente en base a prioridad.
-bool ordenar_prioridad(const struct list_elem *primero, const struct list_elem *segundo, void *aux)
+bool ordenar_prioridad(const struct list_elem *primero, const struct list_elem *segundo, void *aux UNUSED)
 {
   struct thread *first = list_entry(primero,struct thread, elem);
   struct thread *second= list_entry(segundo,struct thread,elem);
@@ -49,7 +49,7 @@ bool ordenar_prioridad(const struct list_elem *primero, const struct list_elem *
 
 }
 
-bool ordenar_lock(const struct list_elem *primero, const struct list_elem *segundo, void *aux)
+bool ordenar_lock(const struct list_elem *primero, const struct list_elem *segundo, void *aux UNUSED)
 {
   struct lock *first_lock = list_entry(primero,struct lock,elemLockHolding);
   struct lock *second_lock= list_entry(segundo,struct lock,elemLockHolding);
@@ -432,7 +432,7 @@ cond_signal (struct condition *cond, struct lock *lock UNUSED)
                           struct semaphore_elem, elem)->semaphore);
 }}
 
-static bool ordenar_cond(const struct list_elem *primero, const struct list_elem *segundo, void *aux )
+static bool ordenar_cond(const struct list_elem *primero, const struct list_elem *segundo, void *aux UNUSED )
 {
   struct semaphore first_semaphore = list_entry (primero, struct semaphore_elem, elem)->semaphore;
   struct semaphore second_semaphore = list_entry (segundo, struct semaphore_elem, elem)->semaphore;

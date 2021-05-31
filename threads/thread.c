@@ -82,7 +82,7 @@ static bool ordenar_prioridad(const struct list_elem *primero, const struct list
 
 void *aux;
 //Funcion para insert_ordered, descendente en base a prioridad.
-bool ordenar_prioridad(const struct list_elem *primero, const struct list_elem *segundo, void *aux)
+bool ordenar_prioridad(const struct list_elem *primero, const struct list_elem *segundo, void *aux UNUSED)
 {
   struct thread *first = list_entry(primero,struct thread, elem);
   struct thread *second= list_entry(segundo,struct thread,elem);
